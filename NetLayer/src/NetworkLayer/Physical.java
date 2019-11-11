@@ -11,7 +11,6 @@ import java.net.UnknownHostException;
 public class Physical {
 	
 	private Socket socket            = null; 
-    //private DataInputStream  input   = null; 
     private DataOutputStream out     = null;
     private ServerSocket server      = null;
     private DataInputStream  in      = null;
@@ -19,8 +18,6 @@ public class Physical {
     {
     	try {
     		socket= new Socket(address,port);
-    		
-    		//input = new DataInputStream(System.in);
     		out = new DataOutputStream(socket.getOutputStream());
     		in = new DataInputStream(socket.getInputStream());
     		System.out.println("Connected");
@@ -38,12 +35,10 @@ public class Physical {
     	try {
 			server=new ServerSocket(port);
 			socket=server.accept();
-			//input = new DataInputStream(System.in);
     		out = new DataOutputStream(socket.getOutputStream());
     		in = new DataInputStream(socket.getInputStream());
     		System.out.println("Connected");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
@@ -67,12 +62,10 @@ public class Physical {
     			level=level|1;
     			if(i==0)
     			level<<=1;
-    			//System.out.print(level+","+i+"  ");
     		}
     		
     		bits<<=1;
     		i=(1-i);
-    		//System.out.print(level+","+i+"  ");
     	}
     	pulse=(char) ('0'+level);
 		signal+=pulse;
@@ -125,11 +118,6 @@ public class Physical {
     	byte bits=0;
     	
     	try {
-    		//int i=0;
-			/*while(in.available()<=0&&i<1000)
-				i++;
-			if(i==100)
-				return (byte)'|';*/
 			signal=in.readUTF();	
 			out.writeBoolean(true);
 						
